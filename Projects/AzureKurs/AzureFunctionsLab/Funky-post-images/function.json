@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route": "images"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "uploadImage",
+      "databaseName": "image",
+      "collectionName": "image",
+      "createIfNotExists": false,
+      "connectionStringSetting": "COSMOS_IMAGE_CONNECTION_STRING",
+      "direction": "out"
+    }
+  ],
+  "scriptFile": "../dist/Funky-post-images/index.js",
+  "disabled": false
+}
