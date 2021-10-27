@@ -1,0 +1,46 @@
+{
+  "bindings": [
+    {
+      "name": "mySbMsg",
+      "type": "serviceBusTrigger",
+      "direction": "in",
+      "queueName": "thumbnailaqueue",
+      "connection": "attilakazurekurssbdb_SERVICEBUS"
+    },
+    {
+      "type": "blob",
+      "direction": "in",
+      "name": "inputBlob",
+      "path": "testimages/{id}.jpg",
+      "dataType": "binary",
+      "connection": "STORAGE_IMAGE_CONNECTION_STRING"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "inputImageDocument",
+      "databaseName": "image",
+      "collectionName": "image",
+      "connectionStringSetting": "COSMOS_IMAGE_CONNECTION_STRING",
+      "id": "{id}",
+      "partitionKey": "{id}"
+    },
+    {
+      "type": "blob",
+      "direction": "out",
+      "name": "outputBlob",
+      "path": "testthumbnails/{id}.jpg",
+      "connection": "STORAGE_IMAGE_CONNECTION_STRING"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "outputDocument",
+      "databaseName": "image",
+      "collectionName": "image",
+      "createIfNotExists": false,
+      "connectionStringSetting": "COSMOS_IMAGE_CONNECTION_STRING"
+    }
+  ],
+  "scriptFile": "../dist/ServiceBusQueueTrigger/index.js"
+}
